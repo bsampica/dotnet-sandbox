@@ -32,16 +32,15 @@ http://localhost:5000/hangfire
 
 
 This project depends on:
-- Microsoft WebAPI
-- .NET 8.0
-- C# 12.0 with Advanced Features enabled
-- git for windows (command line)
-- HangFire
-- Hangfire.Core
-- Hangfire.InMemoryStorage
+- [Microsoft WebAPI](https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0)
+- [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [C# 12.0 with Advanced Features enabled](https://github.com/dotnet/docs/blob/main/docs/csharp/whats-new/csharp-12.md)
+- [git for windows (command line)](https://git-scm.com/downloads)
+- [HangFire](https://www.hangfire.io/)
+- [Hangfire.InMemoryStorage](https://github.com/HangfireIO/Hangfire.InMemory)
 
 ##### Note, these dependencies should install with dotnet restore.
 
 ## Devleopment
-Its being developed in **[ Visual Studio Code ]**, and I've tested it with **[ Visual Studio 2022 ]**, and **[ JetBrains Rider ]**.
+Its being developed in **[] Visual Studio Code**, and I've tested it with **[ Visual Studio 2022 ]**, and **[ JetBrains Rider ]**.
 
