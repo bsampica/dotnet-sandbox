@@ -42,17 +42,21 @@ This project depends on:
 
 ##### Note, these dependencies should install with dotnet restore.
 
+
 ## Development Environment
+
+<span class='color:blue'>
 Its being developed in **Visual Studio Code**, and I've tested it with **Visual Studio 2022**, and **JetBrains Rider**.
+</span>
 
 ## Special Notation
 ### Method Decorators
 In the HangfireJonController you'll notice that the class is annotated.
 
+```[ApiExplorerSettings(IgnoreApi = true)]```
+
 ```
-<span style="color:#fcfcfc">
-*[ApiExplorerSettings(IgnoreApi = true)]*
-</span>
+[ApiExplorerSettings(IgnoreApi = true)]
 public async Task BackgroundWork(int jobParameter CancellationToken token)
 {
     // Simulate some work with a delay
