@@ -6,11 +6,12 @@ This is a personal playground, IE: Sandbox, to test and prototype code in an ope
 #### Clone the repository:
 ``` 
 git clone git@github.com:bsampica/dotnet-sandbox.git     
-```
-#### or
-``` 
+
+or
+
 git clone https://github.com/bsampica/dotnet-sandbox.git
-``` 
+
+```
 
 ## Install the dependencies
 
@@ -42,5 +43,5 @@ This project depends on:
 ##### Note, these dependencies should install with dotnet restore.
 
 ## Devleopment
-Its being developed in **[] Visual Studio Code**, and I've tested it with **[ Visual Studio 2022 ]**, and **[ JetBrains Rider ]**.
+Its being developed in **Visual Studio Code**, and I've tested it with **Visual Studio 2022**, and **JetBrains Rider**.
 
