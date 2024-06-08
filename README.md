@@ -42,6 +42,21 @@ This project depends on:
 
 ##### Note, these dependencies should install with dotnet restore.
 
-## Devleopment
+## Development Environment
 Its being developed in **Visual Studio Code**, and I've tested it with **Visual Studio 2022**, and **JetBrains Rider**.
 
+## Special Notation
+### Method Decorators
+In the HangfireJonController you'll notice that the class is annotated.
+
+```
+<span style="color:#fcfcfc">
+*[ApiExplorerSettings(IgnoreApi = true)]*
+</span>
+public async Task BackgroundWork(int jobParameter CancellationToken token)
+{
+    // Simulate some work with a delay
+    await Task.Delay(TimeSpan.FromMinutes(1), token);
+    Console.WriteLine($"Running Job: {jobParameter}");
+}
+``` 

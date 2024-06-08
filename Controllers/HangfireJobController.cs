@@ -50,7 +50,7 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
         Console.WriteLine($"Running Job: {jobParameter}");
     }
 
-    static async IAsyncEnumerable<int> RangeAsync(int start, int count, [EnumeratorCancellation] CancellationToken token)
+    private static async IAsyncEnumerable<int> RangeAsync(int start, int count, [EnumeratorCancellation] CancellationToken token)
     {
 
         for (int i = 0; i < count; i++)
