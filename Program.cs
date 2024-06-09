@@ -29,7 +29,8 @@ public class Program
             config.UseMemoryStorage();
         });
 
-        builder.Services.AddHangfireServer();
+        builder.Services.AddHangfireServer(options =>
+            options.WorkerCount = Environment.ProcessorCount * 5);
         builder.Services.AddSingleton<AppShutdownService>();
 
         var app = builder.Build();

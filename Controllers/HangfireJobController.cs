@@ -46,17 +46,19 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
     public async Task BackgroundWork(int jobParameter, CancellationToken token)
     {
         // Simulate some work with a delay
-        await Task.Delay(TimeSpan.FromMinutes(1), token);
+        await Task.Delay(TimeSpan.FromSeconds(10), token);
         Console.WriteLine($"Running Job: {jobParameter}");
     }
 
     private static async IAsyncEnumerable<int> RangeAsync(int start, int count, [EnumeratorCancellation] CancellationToken token)
     {
-
         for (int i = 0; i < count; i++)
         {
             if (token.IsCancellationRequested) break;
-            await Task.Delay(1);
+
+            // slow it down a bit so we can see it in the console.
+            // there's really no other reason to do this.
+            await Task.Delay(1, token);
             yield return start + i;
         }
     }
