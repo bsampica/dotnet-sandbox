@@ -45,9 +45,8 @@ This project depends on:
 
 ## Development Environment
 
-<span class='color:blue'>
 Its being developed in **Visual Studio Code**, and I've tested it with **Visual Studio 2022**, and **JetBrains Rider**.
-</span>
+
 
 ## Special Notation
 ### Method Decorators
@@ -64,3 +63,6 @@ public async Task BackgroundWork(int jobParameter CancellationToken token)
     Console.WriteLine($"Running Job: {jobParameter}");
 }
 ``` 
+This prevents <span style="color:#00a2ed"> Swagger</span> and <span style="color:#00a2ed">Swashbuckle</span> from attempting to <span style="color:orange"> discover </span> this method.  It will attempt to <span style="color:orange"> ***map*** </span> any public method on the controller, but in this case will fail because it's not decorated with <span style="color:orange"> [HttpPost] </span> or <span style="color:orange">[HttpGet] </span>..etc.  
+
+It's simply a helper function inside the controller.  In a production product you'd probably have a helper class located somewhere else, or do this work in the next layer down.
