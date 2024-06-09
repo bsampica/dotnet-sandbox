@@ -31,12 +31,8 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
         await foreach (int index in RangeAsync(1, numOfJobs, _shutdownService.Token))
         {
             Console.WriteLine($"Adding Background Jobs To Queue: {index}");
-            await Task.Run(() => _backgroundClient.Enqueue(() =>
-                BackgroundWork(index, CancellationToken.None)))
-                    .ContinueWith((context) =>
-                        {
-                            Console.WriteLine($"Adding to Queue complete - Added : {numOfJobs}");
-                        });
+            _backgroundClient.Enqueue(() =>
+               BackgroundWork(index, CancellationToken.None));
         }
 
         return Ok();

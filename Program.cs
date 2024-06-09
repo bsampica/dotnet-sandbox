@@ -30,7 +30,7 @@ public class Program
         });
 
         builder.Services.AddHangfireServer(options =>
-            options.WorkerCount = Environment.ProcessorCount * 5);
+            options.WorkerCount = Environment.ProcessorCount * 10);
         builder.Services.AddSingleton<AppShutdownService>();
 
         var app = builder.Build();
