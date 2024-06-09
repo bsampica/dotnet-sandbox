@@ -71,3 +71,13 @@ public async Task BackgroundWork(int jobParameter CancellationToken token)
 This prevents <span style="color:#00a2ed"> Swagger</span> and <span style="color:#00a2ed">Swashbuckle</span> from attempting to <span style="color:orange"> discover </span> this method.  
 
 It's simply a helper function inside the controller.  In a production product you'd probably have a helper class located somewhere else, or do this work in the next layer down.
+
+### In Memory Databases (Hangfire)
+As mentioned above, this uses an extension of hangfire written by the Hangfire Team.  For testing, seeding, and job processing, while on the development box; Using an InMemory database is ***AWESOME***.
+
+You should be aware of a couple of things though. 
+- It will increase your app startup time slightly, depending on your configuration.  
+- It will wipe out all your jobs every time the application shuts down.
+- Not all of the features of a full fledged SQL database are available to an InMemory database.  I haven't run into any issues, but your mileage my vary...
+- It's **FAST**.  I dont have timings, (note to self, get timings), but InMemory job storage is quick.
+
