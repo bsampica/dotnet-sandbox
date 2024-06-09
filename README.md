@@ -49,11 +49,16 @@ Its being developed in **Visual Studio Code**, and I've tested it with **Visual 
 
 
 ## Special Notation
-### Method Decorators
-In the HangfireJonController you'll notice that the class is annotated.
+### Non-Standard Method Decorators
+In the HangfireJobController, you'll notice that a method is annotated with the following: 
 
-```[ApiExplorerSettings(IgnoreApi = true)]```
+ ```[ApiExplorerSettings(IgnoreApi = true)]``` 
 
+ I like to refer to this as Configuration over ~~Convention~~ Common Sense.  
+ 
+ Swagger will attempt to <span style="color:orange"> ***map*** </span> any public method on the controller, but in this case will fail because it's not decorated with <span style="color:orange"> [HttpPost] </span> or <span style="color:orange">[HttpGet] </span>..etc.  It's not callable over HTTP and not meant to be.  
+
+**The full method is**
 ```
 [ApiExplorerSettings(IgnoreApi = true)]
 public async Task BackgroundWork(int jobParameter CancellationToken token)
@@ -63,6 +68,6 @@ public async Task BackgroundWork(int jobParameter CancellationToken token)
     Console.WriteLine($"Running Job: {jobParameter}");
 }
 ``` 
-This prevents <span style="color:#00a2ed"> Swagger</span> and <span style="color:#00a2ed">Swashbuckle</span> from attempting to <span style="color:orange"> discover </span> this method.  It will attempt to <span style="color:orange"> ***map*** </span> any public method on the controller, but in this case will fail because it's not decorated with <span style="color:orange"> [HttpPost] </span> or <span style="color:orange">[HttpGet] </span>..etc.  
+This prevents <span style="color:#00a2ed"> Swagger</span> and <span style="color:#00a2ed">Swashbuckle</span> from attempting to <span style="color:orange"> discover </span> this method.  
 
 It's simply a helper function inside the controller.  In a production product you'd probably have a helper class located somewhere else, or do this work in the next layer down.
