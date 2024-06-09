@@ -15,11 +15,11 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
 
     [HttpPost]
     [Route("[action]")]
-    public async Task<IActionResult> QueueJob()
+    public async Task<IActionResult> QueueJob(int jobDelaySeconds)
     {
         _logger.LogInformation("QueueJob Called");
         await Task.Run(() => _backgroundClient.Enqueue(() =>
-            BackgroundWork(1, CancellationToken.None)));
+            BackgroundWork(1, jobDelaySeconds, CancellationToken.None)));
         return Ok();
     }
 
