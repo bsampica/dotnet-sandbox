@@ -25,7 +25,7 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
 
     [HttpPost]
     [Route("[action]")]
-    public async Task<IActionResult> QueueMultipleJobs(int numOfJobs)
+    public async Task<IActionResult> QueueMultipleJobs(int numOfJobs, int jobDelaySeconds)
     {
         _logger.LogInformation("QueueMultipleJobs Called");
         var jobAddingTask = Task.Run(() =>
@@ -34,7 +34,7 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
             {
                 Console.WriteLine($"Adding Background Jobs To Queue: {index}");
                 _backgroundClient.Enqueue(() =>
-                   BackgroundWork(index, CancellationToken.None));
+                   BackgroundWork(index, jobDelaySeconds, CancellationToken.None));
             }
         });
 
@@ -44,10 +44,10 @@ public class HangfireJobController(ILogger<HangfireJobController> _logger,
     }
 
     [ApiExplorerSettings(IgnoreApi = true)]
-    public async Task BackgroundWork(int jobParameter, CancellationToken token)
+    public async Task BackgroundWork(int jobParameter, int jobDelaySeconds, CancellationToken token)
     {
         // Simulate some work with a delay
-        await Task.Delay(TimeSpan.FromSeconds(10), token);
+        await Task.Delay(TimeSpan.FromSeconds(jobDelaySeconds), token);
         Console.WriteLine($"Running Job: {jobParameter}");
     }
 
