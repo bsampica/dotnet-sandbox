@@ -56,7 +56,7 @@ In the HangfireJobController, you'll notice that a method is annotated with the 
 
  I like to refer to this as Configuration over ~~Convention~~ Common Sense.  
  
- Swagger will attempt to <span style="color:orange"> ***map*** </span> any public method on the controller, but in this case will fail because it's not decorated with <span style="color:orange"> [HttpPost] </span> or <span style="color:orange">[HttpGet] </span>..etc.  It's not callable over HTTP and not meant to be.  
+ Swagger will attempt to <span style="color:orangered"> ***map*** </span> any public method on the controller, but in this case will fail because it's not decorated with <span style="color:orangered"> [HttpPost] </span> or <span style="color:orangered">[HttpGet] </span>..etc.  It's not callable over HTTP and not meant to be.  
 
 **The full method is**
 ```
@@ -68,7 +68,7 @@ public async Task BackgroundWork(int jobParameter CancellationToken token)
     Console.WriteLine($"Running Job: {jobParameter}");
 }
 ``` 
-This prevents <span style="color:#00a2ed"> Swagger</span> and <span style="color:#00a2ed">Swashbuckle</span> from attempting to <span style="color:orange"> discover </span> this method.  
+This prevents <span style="color:#00a2ed"> Swagger</span> and <span style="color:#00a2ed">Swashbuckle</span> from attempting to <span style="color:orangered"> discover </span> this method.  
 
 It's simply a helper function inside the controller.  In a production product you'd probably have a helper class located somewhere else, or do this work in the next layer down.
 
@@ -81,3 +81,34 @@ You should be aware of a couple of things though.
 - Not all of the features of a full fledged SQL database are available to an InMemory database.  I haven't run into any issues, but your mileage my vary...
 - It's **FAST**.  I dont have timings, (note to self, get timings), but InMemory job storage is quick.
 
+### API Methods
+#### Methodology
+The main methodology for this project follows typical convention in a webApi.  The url follows
+
+``` http://basepath:port/api/[method]/[parameter]```
+
+## Example
+##### Main Entrypoint
+
+```http://localhost:5000/api/QueueJob```
+
+
+This will create a single background job.  the <span style="color:orangered">jobDelaySeconds</span> determines the amount of time the background job will "pause" - during its execution.  This will simulate the "work" being done in the background.
+
+##### Parameter
+<span style="color:orangered">jobDelaySeconds</span> |  [integer]
+
+
+#### Second Entrypoint
+```http://localhost:5000/api/QueueMultipleJobs```
+
+this will create multiple background jobs.  Internally it runs a foreach loop and adds them in quick succession one after another.
+
+##### Parameters
+<span style="color:orangered">jobDelaySeconds</span> | [integer]
+
+Same as above, the delay inside the job when it's running.
+
+<span style="color:orangered">numOfJobs</span> | [integer]
+
+The number of jobs to create.
